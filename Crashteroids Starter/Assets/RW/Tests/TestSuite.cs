@@ -50,6 +50,21 @@ public class TestSuite
     }
 
     [UnityTest]
+    public IEnumerator scoreReset()
+    {
+        //1 
+        if(game.isGameOver = true)
+        {
+            game.score=0;
+        }
+        game.NewGame();
+        //2
+        game.score = 0;
+        Assert.AreEqual(game.score,0);
+        yield return null;
+    }
+
+    [UnityTest]
     public IEnumerator LaserMovesUp()
     {
         // 1
