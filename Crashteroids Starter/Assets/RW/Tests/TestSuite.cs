@@ -16,11 +16,7 @@ public class TestSuite
         game = gameGameObject.GetComponent<Game>();
     }
 
-    [TearDown]
-    public void Teardown()
-    {
-        Object.Destroy(game.gameObject);
-    }
+
 
     [UnityTest]
     public IEnumerator AsteroidsMoveDown()
@@ -89,6 +85,26 @@ public class TestSuite
         yield return new WaitForSeconds(0.1f);
         // 2
         Assert.AreEqual(game.score, 1);
+    }
+
+    [UnityTest]
+    public IEnumerator PlayerMoveLeftAndRight()
+    {
+        float initialXPos = game.GetShip().transform.position.x;
+        game.GetShip().MoveRight();
+        yield return new WaitForSeconds(0.1f);
+        Assert.Greater(game.GetShip().transform.position.x, initialXPos);
+
+        initialXPos = game.GetShip().transform.position.x;
+        game.GetShip().MoveLeft();
+        yield return new WaitForSeconds(0.1f);
+        Assert.Less(game.GetShip().transform.position.x, initialXPos);
+    }
+
+    [TearDown]
+    public void Teardown()
+    {
+        Object.Destroy(game.gameObject);
     }
 
 }
